@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Define your beans here -->
+    
+     <bean id ="myfortuneService" 
+    class = "com.love2code.Udemy.HappyFortuneService ">
+    </bean>
+    
+    <bean id ="mycoachTest" 
+    class = "com.love2code.Udemy.TrackCoach">     
+    <!--  set up Constructor Injection -->
+    <constructor-arg ref ="myfortuneService" />
+    </bean>
+    
+    
+    <bean id ="myCricketCoach" 
+    class = "com.love2code.Udemy.CricketCoach">     
+    <!--  set up Setter Injection -->
+    <property name= "fortuneService" ref ="myfortuneService" />
+    <!--  Inject Literal values  -->
+    <property name = "email" value ="${foo.email}" />
+    <property name = "team" value ="${foo.team}" />
+    </bean>
+   
+   <!--  load the properties files from sportProperties  -->
+    <context:property-placeholder  location ="/sportProperties.xml"/>
+    
+</beans>
